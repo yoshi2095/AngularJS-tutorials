@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html ng-app = "myModule">
+<head>
+	<title>AngularJS beginners</title>
+	<base href="/">
+	<link rel="stylesheet" href="./Styles/prism.css">
+	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.6.0/themes/prism.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.6.0/plugins/line-numbers/prism-line-numbers.css"> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="./Scripts/prism.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/prismjs@1.6.0/prism.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.6.0/plugins/line-numbers/prism-line-numbers.min.js"></script> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.6.8/angular-messages.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-aria.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-animate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.min.js"></script>
+	<script src="./Scripts/app.js"></script>
+	<script src="./Scripts/filters.js"></script>
+	<script src="./Scripts/stringService.js"></script>
+	<link rel="stylesheet" href="./Styles/style.css">
+</head>
+<body layout="column">
+	<!-- Notes of video 1-9, 15 are missing here. Please see the respective videos. -->
+	<!-- <div class="header" style="font-family: Arial;">
+		<h1 style="margin: 0; padding: 10px">AngularJS Tutorials</h1>
+	</div> -->
+
+	<md-toolbar>
+		<h1 style="text-align: center; margin-top: 13px;">AngularJS Tutorials for Beginners</h1>
+	</md-toolbar>
+
+	<div class="container-fluid" layout="row" flex>
+		<md-sidenav md-is-locked-open="true" class="md-whiteframe-4dp">
+			<md-list>
+
+				<md-list-item layout="row" flex>
+					<a href="introduction" class="text" layout="row" flex style="text-decoration: none;">
+						<md-button flex>
+							<md-icon md-svg-src="icons/label.svg" class="avatar"></md-icon>
+							Part 1
+						</md-button>
+					</a>
+				</md-list-item>
+
+				<md-list-item layout="row" flex>
+					<a href="sortRowsByHeader" class="text" layout="row" flex style="text-decoration: none;">
+						<md-button flex>
+							<md-icon md-svg-src="icons/label.svg" class="avatar"></md-icon>
+							Part 2 
+						</md-button>
+					</a>
+				</md-list-item>
+
+				<md-list-item layout="row" flex>
+					<a href="searchFilterByMultipleProperties" class="text" layout="row" flex style="text-decoration: none;">
+						<md-button flex>
+							<md-icon md-svg-src="icons/label.svg" class="avatar"></md-icon>
+							Part 3
+						</md-button>
+					</a>
+				</md-list-item>
+
+				<md-list-item layout="row" flex>
+					<a href="customFiltersNghideNgshow" class="text" layout="row" flex style="text-decoration: none;">
+						<md-button flex>
+							<md-icon md-svg-src="icons/label.svg" class="avatar"></md-icon>
+							Part 4 
+						</md-button>
+					</a>
+				</md-list-item>
+
+				<md-list-item layout="row" flex>
+					<a href="httpAndLogService" class="text" layout="row" flex style="text-decoration: none;">
+						<md-button flex>
+							<md-icon md-svg-src="icons/label.svg" class="avatar"></md-icon>
+							Part 5
+						</md-button>
+					</a>
+				</md-list-item>
+
+				<md-list-item layout="row" flex>
+					<a href="customService" class="text" layout="row" flex style="text-decoration: none;">
+						<md-button flex>
+							<md-icon md-svg-src="icons/label.svg" class="avatar"></md-icon>
+							Part 6 
+						</md-button>
+					</a>
+				</md-list-item>
+
+				<md-list-item layout="row" flex>
+					<a href="anchorScrollAndLocation" class="text" layout="row" flex style="text-decoration: none;">
+						<md-button flex>
+							<md-icon md-svg-src="icons/label.svg" class="avatar"></md-icon>
+							Part 7 
+						</md-button>
+					</a>
+				</md-list-item>
+
+				<md-list-item layout="row" flex>
+					<a href="controllerAs" class="text" layout="row" flex style="text-decoration: none;">
+						<md-button flex>
+							<md-icon md-svg-src="icons/label.svg" class="avatar"></md-icon>
+							Part 8 
+						</md-button>
+					</a>
+				</md-list-item>
+			</md-list>
+		</md-sidenav>
+
+		<md-content id="content" flex>
+			<ng-view></ng-view>
+		</md-content>
+	</div>
+	<!-- <div style="display: flex;">
+		<div class="leftMenu">
+				
+				// the html5Mode routing is enables hence no #!/ are used.
+				// otherwise it would have been looked like:
+				// <a href="#!/sortRowsByHeader"></a>
+			
+			<ul>
+				<li><a href="sortRowsByHeader">Sort Rows By Header</a></li>
+				<li><a href="searchFilterByMultipleProperties">Search Filter By Multiple Properties</a></li>
+				<li><a href="customFiltersNghideNgshow">Custom Filters, Ng-hide and Ng-show</a></li>
+				<li><a href="httpAndLogService">Http and Log Service</a></li>
+				<li><a href="customService">Custom Services</a></li>
+				<li><a href="anchorScrollAndLocation">Anchor Scroll and Location Services</a></li>
+				<li><a href="controllerAs">Controller As</a></li>
+			</ul>
+		</div>
+		<div class="mainContent">
+			<ng-view></ng-view>
+		</div>
+	</div> -->
+
+
+
+	<!-- <div class="footer">
+		<b>Made By Yoshita Arora</b>
+	</div> -->
+
+	<!-- Video 15 and 16: 
+		 15 :-
+		 It's about ng-init directive. It allows us to evaluate an expression in the
+		 current scope. i,e:
+		 It can also used to initialise variables just like a 
+		 controller does. but always a controller is preffered. 
+		 It should only be used for aliasing the special properties of ng-repeat directive.
+		 for example the $index object. we can assign it to variable and then use it in 
+		 child elements of ng-repeat. For more information, watch this video. 
+		 16 :-
+		 Its about ng-include directive. this directive is used to include any html element
+		 say which is used more than once. we can directly include it by its 'name.html'
+		 within single quotes in the ng-include directive itself, or we can define a variable
+		 storing this name (string) in the controller code and then include that varibale
+		 wihout quotes inside the ng-include directive. For more, watch video 16.
+	-->
+</body>
+</html>

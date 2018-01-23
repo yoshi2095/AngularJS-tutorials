@@ -1,0 +1,111 @@
+<!-- Video 10: To sort rows of a table by table header  -->
+<br>
+<h1>To Sort Rows of a table by table header.</h1>
+<br><br>
+<p>
+	In this tutorial, given a data table, we will be sorting the rows
+	of the table according to the column header of the table. For example,
+	if we click on the column header "Name" for the first time, the rows of the table will be sorted in ascending order (default) of the names of all the workers. If we once again click on the same header, the rows will then be sorted in descending order of the names. Same will be the process for the other column headers date of birth, gender and salary. 
+</p>
+<p>
+	To accomplish this, we attach each column header with a click event using ng-click. The ng-click attribute is attached with a function which performs the task of sorting the columns according to the table's column headers. So, as soon as the person clicks on the column header, the ng-click attribute is invoked which calls the function attached to it. 
+</p>
+<p>
+	The code in our app.js file looks like the following:
+	<br><br>
+	<pre class="line-numbers">
+
+		<code class="language-javascript">
+			var workers = [
+			{name: "Yoshita", dateOfBirth: new Date("September 2, 1995"), gender: "female", salary: "25000"},
+			{name: "Dhawal", dateOfBirth: new Date("October 21, 1993"), gender: "male", salary: "70000"},
+			{name: "Pushpa", dateOfBirth: new Date("August 6, 1962"), gender: "female", salary: "100000"},
+			{name: "Dilpreet", dateOfBirth: new Date("August 20, 1996"), gender: "male", salary: "25000"},
+			];
+
+			$scope.workers = workers;
+			$scope.sortColumn = "name";
+			$scope.reverseSort = false;
+			//alert($scope.reverseSort);
+
+			$scope.sortData = function(column){
+				$scope.reverseSort = ($scope.sortColumn == column)? !$scope.reverseSort : false;
+				$scope.sortColumn = column;
+			}
+
+			$scope.getSortClass = function(column){
+				if ($scope.sortColumn == column) {
+					return ($scope.reverseSort) ? 'arrow-down' : 'arrow-up';
+				}
+				
+				return " ";
+				
+			}	
+		</code>
+
+	</pre>
+</p>
+<p>
+	<br>
+	The code in out html file looks like the following:
+	<br><br>
+	<pre class="line-numbers">
+		<code class="language-markup" ng-non-bindable>
+			&lt;table class=&quot;table table-bordered table-inverse&quot;&gt;
+				&lt;thead&gt;
+					&lt;tr&gt;
+						&lt;th scope=&quot;col&quot; ng-click = sortData(&quot;name&quot;)&gt;
+							Name &lt;div ng-class=&quot;getSortClass(&apos;name&apos;)&quot;&gt;&lt;/div&gt;
+						&lt;/th&gt;
+						&lt;th  scope=&quot;col&quot; ng-click = sortData(&quot;dateOfBirth&quot;)&gt;
+							Date Of Birth &lt;div ng-class = &quot;getSortClass(&apos;dateOfBirth&apos;)&quot;&gt;&lt;/div&gt;
+						&lt;/th&gt;
+						&lt;th scope=&quot;col&quot; ng-click = sortData(&quot;gender&quot;)&gt;
+							Gender &lt;div ng-class = &quot;getSortClass(&apos;gender&apos;)&quot;&gt;&lt;/div&gt;
+						&lt;/th&gt;
+						&lt;th scope=&quot;col&quot; ng-click = sortData(&quot;-salary&quot;)&gt;
+							Salary &lt;div ng-class = &quot;getSortClass(&apos;-salary&apos;)&quot;&gt;&lt;/div&gt;
+						&lt;/th&gt;
+					&lt;/tr&gt;
+				&lt;/thead&gt;
+				&lt;tbody&gt;
+					&lt;tr ng-repeat = &quot;worker in workers | orderBy:sortColumn:reverseSort&quot;&gt;
+						&lt;td&gt;{{worker.name}}&lt;/td&gt;
+						&lt;td&gt;{{worker.dateOfBirth | date: &quot;dd/MM/yyyy&quot;}}&lt;/td&gt;
+						&lt;td&gt;{{worker.gender}}&lt;/td&gt;
+						&lt;td&gt;{{worker.salary}}&lt;/td&gt;		
+					&lt;/tr&gt;
+				&lt;/tbody&gt;	
+			&lt;/table&gt;
+		</code>
+	</pre>
+</p>
+<br><br>
+<h3>Demonstration of this tutorial:</h3>
+<br><br>
+<table class="table table-bordered table-inverse">
+	<thead>
+		<tr>
+			<th scope="col" ng-click = sortData("name")>
+				Name <div ng-class="getSortClass('name')"></div>
+			</th>
+			<th  scope="col" ng-click = sortData("dateOfBirth")>
+				Date Of Birth <div ng-class = "getSortClass('dateOfBirth')"></div>
+			</th>
+			<th scope="col" ng-click = sortData("gender")>
+				Gender <div ng-class = "getSortClass('gender')"></div>
+			</th>
+			<th scope="col" ng-click = sortData("-salary")>
+				Salary <div ng-class = "getSortClass('-salary')"></div>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat = "worker in workers | orderBy:sortColumn:reverseSort">
+			<td>{{worker.name}}</td>
+			<td>{{worker.dateOfBirth | date: "dd/MM/yyyy"}}</td>
+			<td>{{worker.gender}}</td>
+			<td>{{worker.salary}}</td>		
+		</tr>
+	</tbody>	
+</table> 

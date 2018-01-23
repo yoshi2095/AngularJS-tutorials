@@ -1,0 +1,142 @@
+<br>
+
+<h1>Search filter by multiple properties</h1>
+<br>
+In this tutorial, we'll search a given table by multiple properties.
+For example, there will be one search box to search a person by the city he lives in and one will be to search a person by his name. We will also have an "Exact match" checkbox which would allow to display the results only when they exactly match text typed by the user in the search boxes.
+<br><br>
+To achieve this, we'll attach two properties, i.e name and city to the scope object via ng-model attribute and then would use those entered values as a filter parameter, wherever the user types, be it the name search bar or the coty search bar.
+<br><br>
+For the "exact match" functionality, we'll attach the checkbox boolean value to a scope object of type boolean via ng-model directive and then we'll use this value as a second parameter to our filter.
+<br><br> 
+The code in our script file (app.js) looks like the following:
+<br><br>
+<pre class="line-numbers">
+	<code class="language-javascript">
+		var persons = [
+			{name: "Yoshi", gender:"female", salary:"25000", city:"New Delhi"},
+			{name: "Dhawal", gender:"male", salary:"70000", city:"Mumbai"},
+			{name: "Pushpa", gender:"female", salary:"100000", city:"Chennai"},
+			{name: "Dilpreet", gender:"male", salary:"25000", city:"Bangalore"},
+			{name: "Rajdeep", gender:"male", salary:"30000", city:"Kolkata"},
+		]
+
+		$scope.persons = persons;
+
+		$scope.search = function(item){
+
+			if($scope.searchLine == undefined){
+				return true;
+			}
+			else{
+				if(item.name.toLowerCase().indexOf($scope.searchLine.toLowerCase())!=-1||item.city.toLowerCase().indexOf($scope.searchLine.toLowerCase())!=-1){
+					return true;
+				}	
+			}
+			return false;
+		}
+	</code>
+</pre>
+
+<br><br>
+The code inside the html file looks like:
+<br><br>
+<pre class="line-numbers">
+	<code class="language-markup" ng-non-bindable>
+		&lt;div style=&quot;font-size: 20px;&quot;&gt;
+			Search:
+			&lt;span style=&quot;padding: 20px;&quot;&gt;
+				&lt;md-input-container&gt;
+			        &lt;label&gt;Search by name&lt;/label&gt;
+			        &lt;input ng-model=&quot;searchText.name&quot;&gt;
+		    	&lt;/md-input-container&gt;
+			&lt;/span&gt;
+			&lt;span style=&quot;padding: 20px;&quot;&gt;
+				&lt;md-input-container&gt;
+			        &lt;label&gt;Search by city&lt;/label&gt;
+			        &lt;input ng-model=&quot;searchText.city&quot;&gt;
+		    	&lt;/md-input-container&gt;
+			&lt;/span&gt;
+		&lt;/div&gt;
+		&lt;md-checkbox ng-model=&quot;exactMatch&quot;&gt;Exact match&lt;/md-checkbox&gt;
+
+		&lt;table class=&quot;table table-bordered table-inverse&quot;&gt;
+			&lt;thead&gt;
+				&lt;tr&gt;
+					&lt;th&gt;Name&lt;/th&gt;
+					&lt;th&gt;Gender&lt;/th&gt;
+					&lt;th&gt;Salary&lt;/th&gt;
+					&lt;th&gt;City&lt;/th&gt;
+				&lt;/tr&gt;
+			&lt;/thead&gt;
+			&lt;tbody&gt;
+				&lt;tr ng-repeat = &quot;person in persons | filter:searchText:exactMatch&quot;&gt;
+					&lt;td&gt;{{person.name}}&lt;/td&gt;
+					&lt;td&gt;{{person.gender}}&lt;/td&gt;
+					&lt;td&gt;{{person.salary}}&lt;/td&gt;
+					&lt;td&gt;{{person.city}}&lt;/td&gt;
+				&lt;/tr&gt;
+			&lt;/tbody&gt;
+		&lt;/table&gt;
+	</code>
+</pre>
+<br><br>
+<!-- 
+
+Video 11 and 12: Filter by multiple properties.
+
+These below are to search for specific types. Either only name or only city
+and in the filter we'll do: "filter:searchText"  -->
+
+<!-- <input type="text" placeholder="search by name" ng-model = "searchText.name" /> -->
+<h3>Demonstration of this tutorial:</h3>
+<br><br>
+<div style="font-size: 20px;">
+	Search:
+	<span style="padding: 20px;">
+		<md-input-container>
+	        <label>Search by name</label>
+	        <input ng-model="searchText.name">
+    	</md-input-container>
+	</span>
+	<span style="padding: 20px;">
+		<md-input-container>
+	        <label>Search by city</label>
+	        <input ng-model="searchText.city">
+    	</md-input-container>
+	</span>
+</div>
+
+<md-checkbox ng-model="exactMatch">Exact match</md-checkbox>
+
+
+<!-- <input type="text" placeholder="search by city" ng-model = "searchText.city" />  -->
+
+
+<!-- .... This thing below will search for exact match. the checkbox gives a boolean value. this boolean value is binded with the exactMatch variable, and then this variable is included in the filter along with searchFilter variable like: "filter:searchFilter:exactMatch" .... -->
+
+
+
+<!-- <input type="checkbox" ng-model="exactMatch" /> Exact match  -->
+
+<br/>
+<br/>
+
+<table class="table table-bordered table-inverse">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Gender</th>
+			<th>Salary</th>
+			<th>City</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat = "person in persons | filter:searchText:exactMatch">
+			<td>{{person.name}}</td>
+			<td>{{person.gender}}</td>
+			<td>{{person.salary}}</td>
+			<td>{{person.city}}</td>
+		</tr>
+	</tbody>
+</table>

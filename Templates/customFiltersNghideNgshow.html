@@ -1,0 +1,174 @@
+<!-- .... To search for custom filter like (name or city together), we have made a function in our controller ....  -->
+<br>
+<h1><i>Custom Filters</i> and the use of <i>Ng-hide</i> and <i>Ng-show</i></h1> 
+	<br><br>
+	<p>Here, custom filter means that, the user will type anything into the search box, and the data table will be getting filtered according to what the user is typing. For this we'll simply attach an object to the scope with the text that the user writes in the search box using ng-model directive (two way data binding) and pass that variable as a parameter to the filter property, exactly the way we did in the previous tutorial.
+	</p>
+	<br><br>
+	<p>
+		The ng-hide and the ng-show are two directives in AngularJs which allows you to manipulate the visibility (show or hide) of certains elements of your DOM on to the HTML page. Here we are demostrating the ng-hide and ng-show directives by hiding the salaries of the table and showing hash symbols on in place of that one click and then again displaying the salaries and hiding the hashes in another click. This is being done by including an another column of hashes in the DOM and triggering its visibility by using ng-show attribute.
+		<br><br>
+		The ng-hide attribute takes a boolean value (default is false). When the page loads, the ng-hide value of the salaries columns is false, so all the salaries get showing up. when we click the hide checkbox, the hideSalary boolean variables value becomes true. As it is attached with both the salaries and the hashes columns with the ng-hide and the ng-show attributes respectively, when the checkbox is clicked, ng-hide becomes true, and the salaries get hidden, and simultaneously, the ng-show attribute of the hashes column (which was initially false) also becomes true making it visible.
+		<br><br>
+		Note the genders in the second table have been applied with a custom filter made by us in a separate filters.js file in our scripts folder. 
+		This custom filter that we have made converts the gender numbers into their corresponding meanings created by us.  
+	</p>
+	<br><br>
+	<p>
+		The code in the app.js file looks like:
+		<br><br>
+		<pre class="line-numbers">
+			<code class="language-javascript">
+				var employees = [
+				{name: "Yoshita", gender: "1", salary: "25000"},
+				{name: "Dhawal", gender: "2", salary: "50000"},
+				{name: "Pushpa", gender: "1", salary: "75000"},
+				{name: "Dilpreet", gender: "2", salary: "100000"},
+				{name: "Rajdeep", gender: "3", salary: "125000"},
+				]
+
+				$scope.employees = employees;
+			</code>
+		</pre>
+		<br><br>
+		<p>Our filters.js file code looks like:</p>
+		<br><br>
+		<pre class="line-numbers">
+			<code class="language-javascript">
+				angular.module('myModule').filter("gender", function(){
+					return function(gen){
+						switch(gen){
+							case "1":
+								return "Male";
+							case "2":
+								return "Female";
+							case "3":
+								return "Not disclosed";
+						}
+					}
+				})
+			</code>
+		</pre>
+		<br><br>
+		<p>Our html code looks like:</p>
+		<br><br>
+		<pre class="line-numbers">
+			<code class="language-markup" ng-non-bindable>
+				&lt;div style=&quot;font-size: 20px;&quot;&gt;
+					Search:
+					&lt;span style=&quot;padding: 20px;&quot;&gt;
+						&lt;md-input-container&gt;
+					        &lt;label&gt;Search Employee&lt;/label&gt;
+					        &lt;input ng-model=&quot;search&quot;&gt;
+				    	&lt;/md-input-container&gt;
+					&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;table class=&quot;table table-bordered table-inverse&quot;&gt;
+					&lt;thead&gt;
+						&lt;tr&gt;
+							&lt;th&gt;Name&lt;/th&gt;
+							&lt;th&gt;Gender&lt;/th&gt;
+							&lt;th&gt;Salary&lt;/th&gt;
+						&lt;/tr&gt;
+					&lt;/thead&gt;
+					&lt;tbody&gt;
+						&lt;tr ng-repeat = &quot;employee in employees | filter:search&quot;&gt;
+							&lt;td&gt;{{employee.name}}&lt;/td&gt;
+							&lt;td&gt;{{employee.gender}}&lt;/td&gt;
+							&lt;td&gt;{{employee.salary}}&lt;/td&gt;
+						&lt;/tr&gt;
+					&lt;/tbody&gt;
+				&lt;/table&gt;
+
+				&lt;md-checkbox ng-model=&quot;hideSalary&quot;&gt; Hide Salary
+				&lt;/md-checkbox&gt;
+				&lt;table class=&quot;table table-bordered table-inverse&quot;&gt;
+					&lt;thead&gt;
+						&lt;tr&gt;
+							&lt;th&gt;Name&lt;/th&gt;
+							&lt;th&gt;Gender&lt;/th&gt;
+							&lt;th ng-hide = &quot;hideSalary&quot;&gt;Salary&lt;/th&gt; 
+							&lt;th ng-show = &quot;hideSalary&quot;&gt;Salary&lt;/th&gt;
+						&lt;/tr&gt;
+					&lt;/thead&gt;
+					&lt;tbody&gt;
+						&lt;tr ng-repeat = &quot;employee in employees&quot;&gt;
+							&lt;td&gt;{{ employee.name }}&lt;/td&gt;
+							&lt;td&gt;{{ employee.gender|gender}}&lt;/td&gt;
+							&lt;!-- &lt;td&gt;{{ employee.gender | gender }}&lt;/td&gt;  --&gt;
+							&lt;td ng-hide=&quot;hideSalary&quot;&gt;{{ employee.salary }}&lt;/td&gt;
+							&lt;td ng-show=&quot;hideSalary&quot;&gt;#####&lt;/td&gt;
+						&lt;/tr&gt;
+					&lt;/tbody&gt;
+				&lt;/table&gt;
+			</code>
+		</pre>
+	</p>
+	<br><br>
+	<h3>Demonstration of this tutorial:</h3>
+	<br><br>
+	<div style="font-size: 20px;">
+		Search:
+		<span style="padding: 20px;">
+			<md-input-container>
+		        <label>Search Employee</label>
+		        <input ng-model="search">
+	    	</md-input-container>
+		</span>
+	</div>
+	
+	<!-- <input type="text" placeholder="search person" ng-model="search"> -->
+
+	<br> 
+
+	<table class="table table-bordered table-inverse">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Gender</th>
+				<th>Salary</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat = "employee in employees | filter:search">
+				<td>{{employee.name}}</td>
+				<td>{{employee.gender}}</td>
+				<td>{{employee.salary}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br> <br>
+
+<!-- Video 13, 14: This  below is ng-hide and ng-show functionality. 
+initially, the hideSalary will not be available in the scope
+untill we check the checkbox, because we haven't declared any
+variable in $scope object. So it will be undefined. undefined will
+evaluate to false. so the initial value of hideSalary variable 
+will be false. For ng-show to work individually, we can put 
+!hideSalary while binding it with the ng-show attribute. -->
+
+<md-checkbox ng-model="hideSalary"> Hide Salary
+</md-checkbox>
+
+<!-- <input type="checkbox" ng-model = "hideSalary"> Hide Salary
+<br> <br> -->
+
+<table class="table table-bordered table-inverse">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Gender</th>
+			<th ng-hide = "hideSalary">Salary</th> 
+			<th ng-show = "hideSalary">Salary</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat = "employee in employees">
+			<td>{{ employee.name }}</td>
+			<td>{{ employee.gender|gender}}</td>
+			<td ng-hide="hideSalary">{{ employee.salary }}</td>
+			<td ng-show="hideSalary">#####</td>
+		</tr>
+	</tbody>
+</table>

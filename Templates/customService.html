@@ -1,0 +1,114 @@
+<!-- video 20 -->
+<br>
+<h1>Custom Service</h1>
+<br><br>
+<p>
+	In this, we are making a custom service. In the previous part, we used a built-in service of AngularJS. In this tutorial, we'll be making a custom service. 
+	<br><br>
+	This service takes the string typed by the user in the input box, introduces spaces in the string wherever it detects any two continuous upperCase letters not having space between them.
+	<br><br>
+	This is accomplished by attaching a variable with the imput box using two way data binding (ng-model directive) and passing it to a function, which performs the modification. The function calling is attached to a click event. This click event is triggered as soon as the user clicks on the "transform string" button. 
+</p>
+<br><br>
+<p>our app.js:</p>
+<br><br>
+<pre class="line-numbers">
+	<code class="language-javascript">
+		.controller("customServiceController", function($scope, stringService){
+			$scope.transformString = function(input){
+				$scope.output = stringService.processString(input);
+			}
+		});
+	</code>
+</pre>
+<br><br>
+<p>Our custom service file in scripts folder:</p>
+<br><br>
+<pre class="line-numbers">
+	<code class="language-javascript">
+		angular.module('myModule').factory('stringService', function(){
+			return {
+				processString : function(input){
+					if(!input){
+						return input;
+					}
+
+					var output = '';
+
+					for(var i=0; i<input.length; i++){
+						if((i>0) && (input[i] != " ") && (input[i-1]!=" ") && (input[i]==input[i].toUpperCase())){
+							output = output + " ";
+						}
+						output = output + input[i];
+					}
+
+					return output;
+				}
+			}
+		});
+	</code>
+</pre>
+<br><br>
+<p>Our html file:</p>
+<br><br>
+<pre class="line-numbers">
+	<code class="language-markup" ng-non-bindable>
+		&lt;table class=&quot;table table-bordered table-inverse&quot;&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Your string&lt;/td&gt;
+				&lt;td&gt;
+					&lt;md-input-container style=&quot;border: 1px solid white;&quot;&gt;
+						&lt;label style=&quot;color: white&quot;&gt;Type your text here&lt;/label&gt;
+			        	&lt;input style=&quot;color: white&quot; ng-model=&quot;input&quot;&gt;
+		    		&lt;/md-input-container&gt;
+				&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Result&lt;/td&gt;
+				&lt;td&gt;
+					&lt;md-input-container style=&quot;border: 1px solid white;&quot;&gt;
+			        	&lt;input style=&quot;color: white&quot; ng-model=&quot;output&quot;&gt;
+		    		&lt;/md-input-container&gt;
+				&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;&lt;/td&gt;
+				&lt;td&gt;
+					&lt;md-button value=&quot;Process String&quot; class=&quot;md-accent md-raised&quot; ng-click=&quot;transformString(input)&quot;&gt;Transform Text&lt;/md-button&gt;
+				&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/table&gt;
+	</code>
+</pre>
+<br><br>
+<h3>Demonstration:</h3>
+<br><br>
+<table class="table table-bordered table-inverse">
+	<tr>
+		<td>Your string</td>
+		<td>
+			<!-- <input type="text" ng-model="input"> -->
+			<md-input-container style="border: 1px solid white;">
+				<label style="color: white">Type your text here</label>
+	        	<input style="color: white" ng-model="input">
+    		</md-input-container>
+		</td>
+	</tr>
+	<tr>
+		<td>Result</td>
+		<td>
+			<!-- <input type="text" ng-model="output"> -->
+			<md-input-container style="border: 1px solid white;">
+	        	<input style="color: white" ng-model="output">
+    		</md-input-container>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<!-- <input type="button" value="Process String" ng-click="transformString(input)"> -->
+			<md-button value="Process String" class="md-accent md-raised" ng-click="transformString(input)">Transform Text</md-button>
+		</td>
+	</tr>
+</table>
+<br><br>

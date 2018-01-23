@@ -1,0 +1,27 @@
+<br>
+<h1>Book Details:</h1>
+<br>
+<table class="table table-bordered table-inverse">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>ID</th>
+			<th>Author</th>
+			<th>Publishing Date</th>
+			<th>No. of Pages</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{ bookData.volumeInfo.title }}</td>
+			<td>{{ bookData.id }}</td>
+			<td>{{ bookData.volumeInfo.authors[0] }}</td>
+			<td>{{ bookData.volumeInfo.publishedDate }}</td>
+			<td>{{ bookData.volumeInfo.pageCount }}</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+<a href="httpAndLogService" style="text-decoration: none;">
+	<md-button class="md-accent md-raised">Back to Books list (Http and log Service Page)</md-button>
+</a>

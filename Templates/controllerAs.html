@@ -1,0 +1,41 @@
+<br>
+<h1> <i>Controller As</i> method</h1>
+<br><br>
+<p>
+	"Controller As" is better than "$scope". 
+	This is a tutorial of the "controllerAs" property of the when() function of the $routeProvider for rounting in AngularJS. We can use it to provide a specific name to the controller. We can then make the objects of different controllers have same names (we declare the objects using JavaScript's this object), and all will get stored in the $scope object as different variables. So, to use these variables of same names in our view, we will have to specify the controllerAS name with these variables using dot notation. This way we can distinguish between variables of same names in our view easily. This technique is widely practiced as it makes the code more redeable and easy to understand.
+</p>
+<br><br> 
+<p>app.js:</p>
+<br><br>
+<pre class="line-numbers">
+	<code class="language-javascript">
+		app.module("myapp", ["ngRoute", "ngMaterial"])
+		.config(function($routeProvider, $locationProvider){
+			$routeProvider
+			.when("/controllerAs", {
+				templateUrl: "Templates/controllerAs.html",
+				controller: "controllerAsController",
+				controllerAs: "controllerAsCtrl"
+			})
+		})
+		.controller("controllerAsController", function($scope, $rootScope, $log){
+		
+			var msg = "Hello World!";
+			this.message = msg;
+		});
+	</code>
+</pre>
+<br><br>
+<p>html:</p>
+<br><br>
+<pre class="line-numbers">
+	<code class="language-markup" ng-non-bindable>
+		&lt;h4&gt;{{controllerAsCtrl.message}}&lt;/h4&gt;
+	</code>
+</pre>
+<br><br>
+<h3>Demonstration:</h3>
+<br><br>
+<h4>{{controllerAsCtrl.message}}</h4>
+<br><br>

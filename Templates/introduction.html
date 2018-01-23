@@ -1,0 +1,210 @@
+<br>
+<h1>Introduction</h1>
+<br>
+<p>
+	AngularJS is a web application that helps us build web applications.
+	Google is the company that developed AngularJs.
+	AngularJS is an open source community, which means it can be freely used, its source code can be modified/changed and shared by anybody.
+	AngularJS is an excellent framework both single page applications and line of business applications. many companies are using angularJS today and there are many public facing websites that are built with angular.
+	<br><br>
+	There's a website called madewithangular.com that has the list of some of the websites that are built using Angularjs. You can check this link out.
+	<br><br>
+	Now the obvious question that comes to our mind is within the market we already have several other JavaScript frameworks that helped us build web applications so what is the benefit of using angularjs over those JavaScript frameworks that we already have?
+	<br><br>
+	Here are some benefits of AngularJS over other Javascript frameworks:
+	<br><br>
+	<ul>
+		<li>Dependency Injection
+			<p>
+				Dependency Injection is something that angular performs really well. We'll dicuss that later in this tutorial with examples.
+			</p>
+		</li>
+		<li>Two way data binding
+			<p>
+				This is one of the most useful features of AngularJS.
+				Two way data binding keeps the model and the view in sync at all times. Therefore, a change to the model updates the view automatically, and similarly a change to the view updates the model simultaneously. 
+			</p>
+		</li>
+		<li>Testing
+			<p>
+				AngularJs is designed with testing in mind right from the start.
+				AngularJS makes it very easy to test any of its components through both unit testing and end-to-end testing.
+			</p>
+		</li>
+		<li>
+			Model-View-Controller
+			<p>
+				Now, while working with an AngularJS application, you will wonder where to actually get started. Which file to look at first and where to jump next from that file.
+				<br>
+				To understand this, you first need to know that AngularJS follows an MVC (Model-View-Controller) architechture.
+				These are the three things that run hand-in-hand or side-by-side. The model, the view and the controller.
+				<br>
+				We'll discuss about this architechture in detail later, but just to give a idea of it here, all you have to do is split your application code into MVC components that is the model, view and the controller, and the rest -- that is managing those MVC components and connecting them together -- is done by AngularJS automatically and there are many more benefits as well like -- controlling the behavior of Dom elements using directives and the flexibility that AngularJS filters provide. 
+			</p>
+		</li>
+	</ul>
+</p>
+<br><br>
+<p>
+	So to get started with AngularJS, you need to follow the below steps one by one.
+	<ul>
+		<li>
+			Step 1:
+			Make a folder for this project with any name, (say myapp) on your desktop (or anywhere you like).
+		</li>
+		<li>
+			Step 2:
+			Enter this myapp folder.
+			Make an html file. Name this file as index.html. This will act as a place where all our html code will be written, in order for the browser to render it and display it in the browser window.
+			Now just add the usual html tags containing the body sections and the head sections. You can give any title to your app by including it in the title tag in the head section.
+		</li>
+		<li>
+			Step 3:
+			Make another folder inside this myapp directory and name it "Scripts". This is the folder where we'll be placing all our Javascript files. 
+		</li>
+	</ul>
+	This is pretty much it to get started for now.
+	<br><br>
+	Now to get started with Angular, there are two things that you can do.
+	In the index.html file that you have created above, add the reference to the angular.js CDN under the script tags in the head section, or you can download AngularJS file from the AngularJS website, include it in scripts folder, and then add its reference in the index.html file.
+	I'll be using the first method (i.e including CDN) over the second one because CDNs have a lot more benefits over the another way. You can google about the benefits of using CDNs.  
+</p>
+<p>
+	The html file now looks like:
+	<br><br>
+	<pre class="line-numbers">
+		<code class="language-markup">
+			&lt;!DOCTYPE html&gt;
+			&lt;html&gt;
+			&lt;head&gt;
+				&lt;title&gt;AngularJS Tutorials&lt;/title&gt;
+				&lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"&gt;&lt;/script&gt;
+			&lt;/head&gt;
+			&lt;body&gt;
+				&lt;p&gt;Hello World!&lt;/p&gt;
+			&lt;/body&gt;
+			&lt;/html&gt;
+		</code>
+	</pre>
+	<br><br>
+	Now, the next step is to include ng-app attribute somewhere within the html, say, in the body tag like this:
+	<br><br>
+	<pre class="line-numbers">
+		<code class="language-markup">
+			&lt;body ng-app&gt;&lt;/body&gt;
+		</code>
+	</pre>
+	<br>
+	Now, the obvious next question that comes in our mind is what is "ng-app".
+	In Angular, it is called a directive. There are many such directives in AngularJS. You can find the entire list on their website called angularjs.org.
+	<br>
+	The "ng-app" directive is a starting point of AngularJS application. AngularJS framework will first check for this ng-app directive somewhere in the html page. If the ng-app directive is found, AngularJS bootstraps itself and starts to manage the section of the page that has the ng-app directive.
+	<br>
+	So because we have included the ng-app directive inside the "body" section, everything inside the body section will be managed by AngularJS.
+	<br><br>
+	Now, If we want to compute the sum of two intergers (say, 10+20) and display it in the browser, we will need to include this addition expression within curly braces as follows:
+	<br><br>
+	<pre class="line-numbers">
+		<code class="language-markup" ng-non-bindable>
+			&lt;body ng-app&gt;
+				&lt;p&gt;{{10+20}}&lt;/p&gt;
+			&lt;/body&gt;
+		</code>
+	</pre> 
+	<br><br>
+	Now what AngularJS will do is, it will treat the expression inside these braces as something that AngularJS has to compute and return the resulting value. So when you reload your browser window, you wont see "{{10+20}}" on the screen, instead you'll see the value 30.
+	So these curly braces are called binding expressions in AngularJS.
+	<br>
+	Also, It is important to note that AngularJS evaluates these binding expressions only inside the element (and its child elements) with has the "ng-app" attribute included in it. So if we create another paragraph element inside the body tag and include the ng-app attribute only inside the new one, the expression inside the braces will not be treated as an Angular expression, won't be evaluated and so you won't see 30, instead, you'll see "{{10+20}}" written as it is on the browser screen.
+	<br>
+	Hence, there are two things to get started with AngularJS.
+	<br><br>
+	<ul>
+		<li>First: Include the AngularJS reference file in your html file</li>
+		<li>Second: Include the ng-app attribute inside any element.</li>
+	</ul>
+</p>
+<p>
+	<br>
+	<h3>Scope Object in Angular</h3>
+	<br><br>
+	Now, what is Scope object in Angular. To understand this better, first lets create an "app.js" script file in the scripts folder.
+	Now,
+	This is app.js file is the module which wires together all the parts of our angular JS,
+	to make the functionality of our app portable.  Also, It tells Angular how our app
+	has to be bootstrapped.
+	Hence this file will contain the code of all the controllers, services etc.
+	<br><br>
+	<h3>Coming back to MVC</h3>
+	<br>
+	There are three things which run hand in hand
+	ie side by side:
+	<br><br>
+	The first is the "model", which is a synonym for "data". All the data of our app is present inside
+	model. All the data that is coming from the backend API can also be included inside this model 
+	any data (functions and variables) that we are defining inside our javascript (controller) can also be
+	included inside this model. This model is the only thing that we can use inside our HTML file
+	using data bindings, and nothing else, because Angular understands this way only. It deosnt get
+	anything else.
+	<br><br>
+	Now how to make this data a model for angular to understand and hence
+	be able to access this model inside the html file using data binding? 
+	Through $scope object. $scope object is an object which angular automatically passes as a
+	parameter behind the scenes, inside the 
+	javascript controller function made by us, as soon as it encouters this controller function.
+	Now in order to catch
+	this object and use it, we need to include a $scope object as a parameter in our controller
+	function. and so, any variable that we will make in this $scope object, it will be counted
+	as a model, and hence will become angular understandeable. Therefore, after defining any variable
+	or getting the data from the API, we always pass it into the scope object.
+	This is the entire functionality of model.
+	<br><br>
+	The second is "view". this is our html file. Index.html file will display everything.
+	Anything that is kept for angular will be evaluated by
+	angular. hence html file acts as the view of our app. it is responsible for displaying all 
+	the functionality 
+	that we have coded in our controller in the way we want, by forming the htnl file. this html file
+	can access any data inside the model, using one way or 2 way data binding.
+	<br><br>
+	The third is "Controller"
+	This is just a javascript function or more precisely a JS constructor (used to initialise varibles)
+	which we code ourselves, and define initialise varibles, and put them in our model using scope object
+	so that we can access those varibles in our view. Hence this acts as a connector betweeb the model
+	and the view.
+	<br><br>
+	This is the complete MVC (Model View Controller) architechture of AngularJS. this is how it works as a 
+	whole.
+</p>
+<p>
+	So now, moving forward with our code, what we do now is in our app.js file inside the scripts folder we include the following code:
+	<br><br>
+	<pre class="line-numbers">
+		<code class="language-javascript">
+			var app = angular
+						.module("myModule", ["ngMaterial"])
+						.controller("introduction", function($scope){
+							$scope.message = "Hello world!"
+						});
+		</code>
+	</pre>
+	<br><br>
+	and the html file looks like:
+	<br><br>
+	<pre class="line-numbers">
+		<code class="language-markup" ng-non-bindable>
+			&lt;body ng-app&gt;
+				{{message}}
+			&lt;/body&gt;
+		</code>
+	</pre>
+	<br><br>
+	This is app.js file is the module which wires together all the parts of our angular JS,
+	to make the functionality of our app portable.  Also, It tells Angular how our app
+	has to be bootstrapped.
+	As the message variable was included inside the $scope object, it gets rendered as an expression by the AngularJS app and hence the value inside that message object is displayed in the browser window.
+</p>
+<br><br>
+Note: In the further parts of the tutorial, I have used AngularJS Material as a tool for markup formatting. This step just requires your app.module function to include 'ngMaterial' as a dependency.
+<br><br>
+<p>If you're done with this tutorial, please click on the side menu for Part 2 of this tutorial series.</p>
+<br><br><br>

@@ -1,0 +1,120 @@
+<br>
+<h1>Http Log and Service</h1>
+<br><br>
+<p>
+	In this, we are fetching the data from the Google Books API, storing it in our model, and displaying it in our app. This is done by using the built-in $http service of Angular.
+	This $http service fetches the data from the API and stores it in the response object. Then we pass this response into our $scope object in order to be able to use it in our html file.
+</p>
+<br><br>
+<p>Our app.js file looks like:</p>
+<br><br>
+<pre class="line-numbers">
+	<code class="language-javascript">
+		.controller("httpAndLogServiceController", function($scope, $log, $http, $route){
+
+		$scope.query = 'harry';
+
+		$scope.$watch('query', function(){
+					$http({
+						url: "https://www.googleapis.com/books/v1/volumes?q=" + $scope.query,
+						method: "get"
+					})
+					.then(function(response){
+						$scope.books = response.data.items;
+						// $log.info(response);
+					}, function(reason){
+					 	$scope.error = reason.data;
+					 	$log.info(reason);
+					});
+				});
+
+				$scope.reloadData = function(){
+					$route.reload();
+				}
+		});
+	</code>
+</pre>
+<br><br>
+<p>Our HTML file looks like:</p>
+<br><br>
+<pre class="line-numbers">
+	<code class="language-markup" ng-non-bindable>
+		&lt;div style=&quot;font-size: 20px;&quot;&gt;
+			Search:
+			&lt;span style=&quot;padding: 20px;&quot;&gt;
+				&lt;md-input-container&gt;
+			        &lt;label&gt;Search Book&lt;/label&gt;
+			        &lt;input ng-model=&quot;query&quot;&gt;
+		    	&lt;/md-input-container&gt;
+			&lt;/span&gt;
+		&lt;/div&gt;
+
+		&lt;br&gt;
+		{{error}}
+		&lt;br&gt;
+
+		&lt;table class=&quot;table table-bordered table-inverse&quot;&gt;
+			&lt;thead&gt;
+				&lt;tr&gt;
+					&lt;th&gt;Title&lt;/th&gt;
+				&lt;/tr&gt;
+			&lt;/thead&gt;
+			&lt;tbody&gt;
+				&lt;tr ng-repeat = &quot;book in books&quot;&gt;
+					&lt;td&gt;
+						&lt;a href=&quot;httpAndLogService/{{book.id}}&quot;&gt;
+							{{ book.volumeInfo.title }}
+						&lt;/a&gt;
+					&lt;/td&gt;
+				&lt;/tr&gt;
+			&lt;/tbody&gt;
+		&lt;/table&gt;
+		&lt;br&gt;
+		&lt;md-button class=&quot;md-accent md-raised&quot; ng-click=&quot;reloadData()&quot;&gt;Reload Data&lt;/md-button&gt;
+
+	</code>
+</pre>
+<br><br>
+<h3>Demonstration of this tutorial:</h3>
+<br><br>
+<div style="font-size: 20px;">
+	Search:
+	<span style="padding: 20px;">
+		<md-input-container>
+	        <label>Search Book</label>
+	        <input ng-model="query">
+    	</md-input-container>
+	</span>
+</div>
+
+<!-- <input type="text" placeholder="type your query" ng-model="query"> -->
+<br>
+{{error}}
+<br>
+
+<table class="table table-bordered table-inverse">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<!-- <th>Author</th>
+			<th>Publishing Date</th>
+			<th>No. of Pages</th> -->
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat = "book in books">
+			<td>
+				<a href="httpAndLogService/{{book.id}}">
+					{{ book.volumeInfo.title }}
+				</a>
+			</td>
+			<!-- <td>{{ book.volumeInfo.authors[0] }}</td>
+			<td>{{ book.volumeInfo.publishedDate }}</td>
+			<td>{{  book.volumeInfo.pageCount }}</td>-->
+		</tr>
+	</tbody>
+</table>
+<br>
+<md-button class="md-accent md-raised" ng-click="reloadData()">Reload Data</md-button>
+<!-- <button ng-click="reloadData()">Reload Data</button> -->
+<br><br>
