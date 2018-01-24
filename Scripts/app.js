@@ -53,11 +53,11 @@ var app = angular
 													// we can specify this property individually
 													// also inside every when() object.
 		$routeProvider
-			.when("AngularJS-tutorials/introduction", {
+			.when("/introduction", {
 				templateUrl: "Templates/introduction.html",
 				controller: "introduction"
 			})
-			.when("AngularJS-tutorials/sortRowsByHeader", {
+			.when("/sortRowsByHeader", {
 				templateUrl: "Templates/sortRowsByHeader.html", // we can also use inline templates
 																// instead of separate html files.
 																// In that case, the property name will be
@@ -66,37 +66,37 @@ var app = angular
 																// template: "<h1>Inline templates</h1>"  
 				controller: "sortRowsByHeaderController"
 			})
-			.when("AngularJS-tutorials/searchFilterByMultipleProperties", {
+			.when("/searchFilterByMultipleProperties", {
 				templateUrl: "Templates/searchFilterByMultipleProperties.html",
 				controller: "searchFilterByMultiplePropertiesController"
 			})
-			.when("AngularJS-tutorials/customFiltersNghideNgshow", {
+			.when("/customFiltersNghideNgshow", {
 				templateUrl: "Templates/customFiltersNghideNgshow.html",
 				controller: "customFiltersNghideNgshowController"
 			})
-			.when("AngularJS-tutorials/httpAndLogService", {
+			.when("/httpAndLogService", {
 				templateUrl: "Templates/httpAndLogService.html",
 				controller: "httpAndLogServiceController"
 			})
-			.when("AngularJS-tutorials/httpAndLogService/:id", {
+			.when("/httpAndLogService/:id", {
 				templateUrl: "Templates/httpAndLogServiceDetails.html",
 				controller: "httpAndLogServiceDetailsController"
 			})
-			.when("AngularJS-tutorials/customService", {
+			.when("/customService", {
 				templateUrl: "Templates/customService.html",
 				controller: "customServiceController"
 			})
-			.when("AngularJS-tutorials/anchorScrollAndLocation", {
+			.when("/anchorScrollAndLocation", {
 				templateUrl: "Templates/anchorScrollAndLocation.html",
 				controller: "anchorScrollAndLocationController"
 			})
-			.when("AngularJS-tutorials/controllerAs", {
+			.when("/controllerAs", {
 				templateUrl: "Templates/controllerAs.html",
 				controller: "controllerAsController",
 				controllerAs: "controllerAsCtrl"
 			})
 			.otherwise({
-				redirectTo: 'AngularJS-tutorials/introduction' 
+				redirectTo: '/introduction' 
 			});
 		// $locationProvider.html5Mode(true); // to remove he hash and the ! symbol from the 
 										   // url and make them cleaner.
