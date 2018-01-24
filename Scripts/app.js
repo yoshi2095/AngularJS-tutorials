@@ -98,7 +98,7 @@ var app = angular
 			.otherwise({
 				redirectTo: '/introduction' 
 			});
-		$locationProvider.html5Mode(true); // to remove he hash and the ! symbol from the 
+		// $locationProvider.html5Mode(true); // to remove he hash and the ! symbol from the 
 										   // url and make them cleaner.
 		 // $locationProvider.hashPrefix('');
 
